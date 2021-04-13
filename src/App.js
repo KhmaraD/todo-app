@@ -1,25 +1,47 @@
-import logo from './logo.svg';
 import './App.css';
+import List from "./components/List/List";
+import listSvg from "./assets/images/list.svg";
+import React from "react";
+import AddList from "./components/AddButtonList/AddList";
 
-function App() {
+import DB from './assets/db.json'
+
+const App = () => {
+    // const [state, setState] = useState(initialState)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="todo">
+          <div className="todo__sidebar">
+              <List
+                  items={[
+                  {
+                      icon: (
+                          <img src={listSvg} alt="list icon" />
+                      ),
+                      name: 'All tasks',
+                      active: true,
+                  }
+              ]}/>
+              <List items={[
+                  {
+                      color: 'green',
+                      name: 'Shopping',
+                  },
+                  {
+                      color: 'blue',
+                      name: 'Frontend',
+                  },
+                  {
+                      color: 'pink',
+                      name: 'Books'
+                  }
+              ]}
+              isRemovable />
+              <AddList colors={DB.colors}/>
+          </div>
+          <div className="todo__tasks">
+
+          </div>
+      </div>
   );
 }
-
 export default App;
