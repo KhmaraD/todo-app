@@ -8,6 +8,16 @@ import "./AddList.scss";
 const AddList = ({ colors }) => {
     const [visiblePopup, setVisiblePopup] = useState(false);
     const [selectedColor, selectColor] = useState(colors[0].id);
+    const [inputValue, setInputValue] = useState('');
+
+    const addList = () => {
+        if (!inputValue) {
+            alert('Enter the name of the list');
+            return;
+        }
+        console.log({"id": 1, "name": inputValue, "colorId": 5});
+
+    }
 
     return (
         <div className="add-list">
@@ -32,7 +42,11 @@ const AddList = ({ colors }) => {
                 <img
                     onClick={() => setVisiblePopup(false)}
                     src={closeSvg} alt="Close button" className="add-list__popup-close-btn"/>
-                <input className="field" type="text" placeholder="List name"/>
+                <input value={inputValue}
+                       onChange={e => setInputValue(e.target.value)}
+                       className="field"
+                       type="text"
+                       placeholder="List name"/>
                 <div className="add-list__popup-colors">
                     { colors.map(color => (
                         <Badge
@@ -42,7 +56,7 @@ const AddList = ({ colors }) => {
                             className={selectedColor === color.id && 'active'}/>
                     ))}
                 </div>
-                <button className="button">Add</button>
+                <button onClick={addList} className="button">Add</button>
             </div>}
         </div>
     );

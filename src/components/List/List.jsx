@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import Badge from "../Badge/Badge";
 
 import './List.scss';
-import DB from '../../assets/db.json'
 
 const List = ({ items, isRemovable, onClick }) => {
     return (
