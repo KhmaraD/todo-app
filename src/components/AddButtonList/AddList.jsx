@@ -5,18 +5,25 @@ import Badge from "../Badge/Badge";
 import closeSvg from '../../assets/images/close.svg'
 import "./AddList.scss";
 
-const AddList = ({ colors }) => {
+const AddList = ({ colors, onAddList }) => {
     const [visiblePopup, setVisiblePopup] = useState(false);
     const [selectedColor, selectColor] = useState(colors[0].id);
     const [inputValue, setInputValue] = useState('');
+
+    const onClose = () => {
+        setVisiblePopup(false);
+        setInputValue('');
+        selectColor(colors[0].id);
+    }
 
     const addList = () => {
         if (!inputValue) {
             alert('Enter the name of the list');
             return;
         }
-        console.log({"id": 1, "name": inputValue, "colorId": 5});
-
+        const color = colors.filter(c => c.id === selectedColor)[0].name;
+        onAddList({id: Math.random(), name: inputValue, color});
+        onClose();
     }
 
     return (
@@ -36,12 +43,13 @@ const AddList = ({ colors }) => {
                     ),
                     name: 'Add list',
                 },
-            ]}
-                  isRemovable/>
+            ]} />
             {visiblePopup && <div className="add-list__popup">
                 <img
-                    onClick={() => setVisiblePopup(false)}
-                    src={closeSvg} alt="Close button" className="add-list__popup-close-btn"/>
+                    onClick={onClose}
+                    src={closeSvg}
+                    alt="Close button"
+                    className="add-list__popup-close-btn"/>
                 <input value={inputValue}
                        onChange={e => setInputValue(e.target.value)}
                        className="field"
