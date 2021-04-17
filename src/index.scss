@@ -18,6 +18,7 @@ code {
 }
 
 .todo {
+  display: flex;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -35,6 +36,11 @@ code {
     height: 100%;
     border-right: 1px solid #f1f1f1;
     padding: 60px 20px;
+  }
+
+  &__tasks {
+    flex: 1;
+    padding: 60px;
   }
 }
 

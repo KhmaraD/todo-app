@@ -21,7 +21,7 @@ const AddList = ({ colors, onAddList }) => {
             alert('Enter the name of the list');
             return;
         }
-        const color = colors.filter(c => c.id === selectedColor)[0].name;
+        const color = colors.find(c => c.id === selectedColor).name;
         onAddList({id: Math.random(), name: inputValue, color});
         onClose();
     }
