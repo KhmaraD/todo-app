@@ -29,7 +29,7 @@ const Tasks = () => {
                             </svg>
                         </label>
                     </div>
-                    <p>Learn JavaScript</p>
+                    <input value="Learn JavaScript" />
                 </div>
             </div>
         </div>
