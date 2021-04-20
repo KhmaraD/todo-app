@@ -8,11 +8,7 @@ import axios from 'axios'
 const App = () => {
     const [lists, setLists] = useState(null);
     const [colors, setColors] = useState(null);
-        // DB.lists.map(item => {
-        //     item.color = DB.colors.filter(color => color.id === item.colorId)[0].name;
-        //     return item;
-        // })
-
+    const [activeItem, setActiveItem] = useState(null);
 
     useEffect(() => {
         axios.get('http://localhost:3004/lists?_expand=color&_embed=tasks')
@@ -49,6 +45,9 @@ const App = () => {
                       onRemove={id => {
                           const newLists = lists.filter(item => item.id !== id);
                           setLists(newLists);
+                      }}
+                      onClickItem={item => {
+                          setActiveItem(item);
                       }}
                       isRemovable
                   />
