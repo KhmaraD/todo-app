@@ -6,7 +6,7 @@ import editSvg from '../../assets/images/edit.svg'
 
 import './Tasks.scss';
 
-const Tasks = ({ list, onEditTitle }) => {
+const Tasks = ({ list, onEditTitle, onAddTask }) => {
 
     const editTitle = () => {
         const newTitle = window.prompt('List name', list.name);
@@ -50,7 +50,7 @@ const Tasks = ({ list, onEditTitle }) => {
                         <input readOnly value={task.text}/>
                     </div>))
                 }
-                <AddTaskForm />
+                <AddTaskForm list={list} onAddTask={onAddTask}/>
             </div>
         </div>
     );
