@@ -3,12 +3,14 @@ import listSvg from "./assets/images/list.svg";
 import React, {useState, useEffect} from "react";
 import { List, AddList, Tasks} from './components'
 import axios from 'axios'
-// import DB from './assets/db.json'
+import { Route, useLocation, useHistory } from 'react-router-dom'
 
 const App = () => {
     const [lists, setLists] = useState(null);
     const [colors, setColors] = useState(null);
     const [activeItem, setActiveItem] = useState(null);
+    let history = useHistory();
+    let location = useLocation()
 
     useEffect(() => {
         axios.get('http://localhost:3004/lists?_expand=color&_embed=tasks')
@@ -46,10 +48,21 @@ const App = () => {
         setLists(newList);
     }
 
+    useEffect(() => {
+        const listId = history.location.pathname.split('lists/')[1];
+        if (lists) {
+            const list = lists.find(list => list.id === Number(listId));
+            setActiveItem(list);
+        }
+    }, [lists, history.location.pathname]);
+
   return (
       <div className="todo">
           <div className="todo__sidebar">
               <List
+                  onClickItem={list => {
+                      history.push(`/`);
+                  }}
                   items={[
                   {
                       active: true,
@@ -66,8 +79,8 @@ const App = () => {
                           const newLists = lists.filter(item => item.id !== id);
                           setLists(newLists);
                       }}
-                      onClickItem={item => {
-                          setActiveItem(item);
+                      onClickItem={list => {
+                          history.push(`/lists/${list.id}`);
                       }}
                       activeItem={activeItem}
                       isRemovable
@@ -78,12 +91,25 @@ const App = () => {
               <AddList onAdd={onAddList} colors={colors} />
           </div>
           <div className="todo__tasks">
-              {lists && activeItem && (
-                  <Tasks
-                      list={activeItem}
-                      onAddTask={onAddTask}
-                      onEditTitle={onEditListTitle} />
-              )}
+              <Route exact path="/">
+                  {lists &&
+                  lists.map(list => (
+                      <Tasks
+                          key={list.id}
+                          list={list}
+                          onAddTask={onAddTask}
+                          onEditTitle={onEditListTitle}
+                          withoutEmpty/>
+                  ))}
+              </Route>
+              <Route path="/lists/:id">
+                  {lists && activeItem && (
+                      <Tasks
+                          list={activeItem}
+                          onAddTask={onAddTask}
+                          onEditTitle={onEditListTitle} />
+                  )}
+              </Route>
           </div>
       </div>
   );
