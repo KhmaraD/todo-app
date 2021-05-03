@@ -36,7 +36,7 @@
       "id": 1,
       "listId": 2,
       "text": "JavaScript",
-      "completed": true
+      "completed": false
     },
     {
       "id": 2,
@@ -48,7 +48,7 @@
       "id": 3,
       "listId": 2,
       "text": "ReactJS Hooks (useState, useReducer, useEffect...)",
-      "completed": true
+      "completed": false
     },
     {
       "id": 4,
@@ -57,16 +57,16 @@
       "completed": false
     },
     {
-      "listId": 2,
-      "text": "123",
-      "completed": false,
-      "id": 5
-    },
-    {
       "listId": 3,
       "text": "123",
-      "completed": false,
+      "completed": true,
       "id": 6
+    },
+    {
+      "listId": 1,
+      "text": "New list",
+      "completed": false,
+      "id": 7
     }
   ],
   "colors": [
