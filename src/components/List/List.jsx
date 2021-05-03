@@ -1,8 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import Badge from '../Badge/Badge';
-import axios from "axios";
-
+import {listsAPI} from "../api/api";
 import removeSvg from '../../assets/images/remove.svg'
 import './List.scss';
 
@@ -10,10 +9,7 @@ const List = ({items, isRemovable, onClick, onRemove, onClickItem, activeItem}) 
 
     const removeList = (item) => {
         if (window.confirm('Delete list?')) {
-            axios.delete('http://localhost:3004/lists/' + item.id)
-                .then(() => {
-                onRemove(item.id);
-            });
+            listsAPI.deleteList(item, onRemove);
         }
     }
 

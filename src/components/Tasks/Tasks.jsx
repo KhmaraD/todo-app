@@ -1,11 +1,10 @@
 import React from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import {listsAPI} from "../api/api";
 
 import editSvg from '../../assets/images/edit.svg';
 
 import './Tasks.scss';
-
 import AddTaskForm from './AddTaskForm';
 import Task from './Task';
 
@@ -22,13 +21,7 @@ const Tasks = ({
         const newTitle = window.prompt('List name', list.name);
         if (newTitle) {
             onEditTitle(list.id, newTitle);
-            axios
-                .patch('http://localhost:3004/lists/' + list.id, {
-                    name: newTitle
-                })
-                .catch(() => {
-                    alert('Failed to update list title');
-                });
+            listsAPI.editListTitle(list, newTitle);
         }
     };
 

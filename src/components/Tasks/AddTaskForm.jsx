@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import addSvg from "../../assets/images/add.svg";
-import axios from "axios";
+import {tasksAPI} from "../api/api";
 
 const AddTaskForm = ({list, onAddTask}) => {
     const [visibleForm, setVisibleForm] = useState(false);
@@ -19,18 +19,7 @@ const AddTaskForm = ({list, onAddTask}) => {
             completed: false
         };
         setIsLoading(true);
-        axios.post('http://localhost:3004/tasks', obj)
-            .then(({data}) => {
-                console.log(data);
-                onAddTask(list.id, data);
-                toggleFormVisible();
-            })
-            .catch(() => {
-                alert('error adding task!')
-            })
-            .finally(() => {
-                setIsLoading(false);
-        });
+        tasksAPI.addTask(obj, onAddTask, list, toggleFormVisible, setIsLoading);
     };
 
     return (

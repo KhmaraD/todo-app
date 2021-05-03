@@ -1,9 +1,9 @@
 import './App.css';
 import listSvg from "./assets/images/list.svg";
 import React, {useState, useEffect} from "react";
-import { List, AddList, Tasks} from './components'
-import axios from 'axios'
-import { Route, useLocation, useHistory } from 'react-router-dom'
+import { List, AddList, Tasks} from './components';
+import { Route, useLocation, useHistory } from 'react-router-dom';
+import {colorsAPI, listsAPI, tasksAPI} from "./components/api/api";
 
 const App = () => {
     const [lists, setLists] = useState(null);
@@ -13,14 +13,8 @@ const App = () => {
     let location = useLocation()
 
     useEffect(() => {
-        axios.get('http://localhost:3004/lists?_expand=color&_embed=tasks')
-            .then(({data}) => {
-                setLists(data);
-            });
-        axios.get('http://localhost:3004/colors')
-            .then(({data}) => {
-                setColors(data);
-            });
+        listsAPI.getAllLists(setLists);
+        colorsAPI.getColors(setColors);
     }, []);
 
     const onAddList = (obj) => {
@@ -67,13 +61,7 @@ const App = () => {
             return list;
         });
         setLists(newList);
-        axios
-            .patch('http://localhost:3004/tasks/' + taskObj.id, {
-                text: newTaskText
-            })
-            .catch(() => {
-                alert('Failed to update task');
-            });
+        tasksAPI.editTask(taskObj, newTaskText);
     };
 
     const onRemoveTask = (listId, taskId) => {
@@ -85,9 +73,7 @@ const App = () => {
                 return item;
             });
             setLists(newList);
-            axios.delete('http://localhost:3004/tasks/' + taskId).catch(() => {
-                alert('Failed to delete task');
-            });
+            tasksAPI.deleteTask(taskId);
         }
     };
 
@@ -104,13 +90,7 @@ const App = () => {
             return list;
         });
         setLists(newList);
-        axios
-            .patch('http://localhost:3004/tasks/' + taskId, {
-                completed
-            })
-            .catch(() => {
-                alert('Failed to update task');
-            });
+        tasksAPI.completeTask(taskId, completed);
     };
 
     useEffect(() => {

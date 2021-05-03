@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import List from "../List/List";
 import Badge from "../Badge/Badge";
+import {listsAPI} from "../api/api";
 
 import closeSvg from '../../assets/images/close.svg'
 import "./AddList.scss";
-import axios from "axios";
 
 const AddList = ({ colors, onAdd }) => {
     const [visiblePopup, setVisiblePopup] = useState(false);
@@ -30,22 +30,7 @@ const AddList = ({ colors, onAdd }) => {
             return;
         }
         setIsLoading(true);
-        axios.post('http://localhost:3004/lists', {
-                name: inputValue,
-                colorId: selectedColor
-            })
-            .then(({ data }) => {
-                const color = colors.filter(c => c.id === selectedColor)[0];
-                const listObj = { ...data, color, tasks: [] };
-                onAdd(listObj);
-                onClose();
-            })
-            .catch(() => {
-                alert('Error adding list!')
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
+        listsAPI.addList(inputValue, colors, selectedColor, onAdd, onClose, setIsLoading);
     }
 
     return (
