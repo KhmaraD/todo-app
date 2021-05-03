@@ -6,8 +6,10 @@ Stack:
 - Axios
 - 
 
-first ### `npm fake-server`
-then ### `npm start`
+first 
+### `npm fake-server`
+then 
+### `npm start`
 
 # Getting Started with Create React App
 
