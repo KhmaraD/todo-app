@@ -4,7 +4,7 @@ Stack:
 - ReactJS (useState, useReducer, useEffect)
 - React Router
 - Axios
-- 
+- json-server
 
 first 
 ### `npm fake-server`
