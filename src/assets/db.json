@@ -36,19 +36,19 @@
       "id": 1,
       "listId": 2,
       "text": "JavaScript",
-      "completed": false
+      "completed": true
     },
     {
       "id": 2,
       "listId": 2,
       "text": "Design patterns",
-      "completed": false
+      "completed": true
     },
     {
       "id": 3,
       "listId": 2,
       "text": "ReactJS Hooks (useState, useReducer, useEffect...)",
-      "completed": false
+      "completed": true
     },
     {
       "id": 4,
@@ -59,7 +59,7 @@
     {
       "listId": 3,
       "text": "1234",
-      "completed": true,
+      "completed": false,
       "id": 6
     },
     {
@@ -67,6 +67,18 @@
       "text": "New list",
       "completed": false,
       "id": 7
+    },
+    {
+      "listId": 1,
+      "text": "The first shopping list",
+      "completed": true,
+      "id": 8
+    },
+    {
+      "listId": 1,
+      "text": "Another shopping list",
+      "completed": true,
+      "id": 9
     }
   ],
   "colors": [
