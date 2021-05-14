@@ -3,7 +3,7 @@ import * as axios from 'axios';
 const instance = axios.create({
     withCredentials: true,
     // baseURL: 'http://localhost:3004/',
-    baseURL: 'http://my-json-server.typicode.com/KhmaraD/todo-app/blob/master/', // for gh-pages
+    baseURL: 'https://my-json-server.typicode.com/KhmaraD/todo-app/blob/master/', // for gh-pages
 })
 
 export const listsAPI = {
